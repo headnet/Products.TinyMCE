@@ -207,6 +207,7 @@
                                 <option value="http://">http://</option>
                                 <option value="https://">https://</option>
                                 <option value="ftp://">ftp://</option>
+                                <option value="file://">file://</option>
                             </select>
                             <input type="text" name="externalurl" id="externalurl" value="" size="29"/>
                         </div>

@@ -220,7 +220,8 @@ BrowserDialog.prototype.init = function () {
                 jq('#cssstyle', document).val(selected_node.attr('style'));
                 jq('#linktype a[href=#email]', document).click();
             } else if ((href.indexOf(this.editor.settings.portal_url) === -1) &&
-                ((href.indexOf('http://') === 0) || (href.indexOf('https://') === 0) || (href.indexOf('ftp://') === 0))) {
+                ((href.indexOf('http://') === 0) || (href.indexOf('https://') === 0) ||
+                 (href.indexOf('ftp://') === 0) || (href.indexOf('file://') == 0))) {
                 // external
                 this.checkExternalURL(href);
                 jq('#cssstyle', document).val(selected_node.attr('style'));
@@ -257,7 +258,8 @@ BrowserDialog.prototype.init = function () {
         } else {
             // plain text selection
             href = jq.trim(this.editor.selection.getContent());
-            if ((href.indexOf('http://') === 0) || (href.indexOf('https://') === 0) || (href.indexOf('ftp://') === 0)) {
+            if ((href.indexOf('http://') === 0) || (href.indexOf('https://') === 0) ||
+                (href.indexOf('ftp://') === 0) || (href.indexOf('file://') == 0)) {
                 this.checkExternalURL(href);
                 jq('#linktype a[href=#external]', document).click();
             } else {
@@ -1049,7 +1051,8 @@ BrowserDialog.prototype.getAbsoluteUrl = function (base, link) {
         link_array,
         item;
 
-    if ((link.indexOf('http://') > -1) || (link.indexOf('https://') > -1) || (link.indexOf('ftp://') > -1)) {
+    if ((link.indexOf('http://') > -1) || (link.indexOf('https://') > -1) || (link.indexOf('ftp://') > -1) ||
+        (link.indexOf('file://') > -1)) {
         return link;
     }
 
@@ -1230,7 +1233,7 @@ BrowserDialog.prototype.checkExternalURL = function (href) {
         href = jq.trim(el.val());
     }
 
-    if (jq.inArray(scheme, ['http', 'ftp', 'https']) > -1) {
+    if (jq.inArray(scheme, ['http', 'ftp', 'https', 'file']) > -1) {
         jq(el).val(href.substr(scheme.length + 3, href.length));
         jq('#externalurlprefix', document).val(scheme + '://');
     }
